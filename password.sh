@@ -30,7 +30,6 @@ else echo "password should contains Upper case letters"
 fi
 
 check=${#pass}
-    #cho $check
 if [ $check -le 9 ];
 then echo "error - password length is less then 10" ;
     quitWrong $pass
