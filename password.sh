@@ -16,13 +16,33 @@ function PrintPass {
 pass="$1"
 exitcode=0
 
+
+while getopts f: option
+do 
+    case "${option}"
+        in
+        f)file=${OPTARG};;
+    esac
+done
+
+
+if [ -z "$file" ]
+then
+      pass="$1"
+else
+   filename="$2"
+   while read -r line; do
+   pass="$line"
+   done < "$filename"
+fi
+
 if [[ $pass= =~ [[:alpha:]] && $pass =~ [[:digit:]] ]]; then
    exitcode=0
 else echo "password should contains both digit and letter"
       quitWrong $pass
 fi
 
-if [[ "$pass" =~ ^[A-Z] ]]
+if [[ $pass =~ [A-Z] ]]
 then
    exitcode=0
 else echo "password should contains Upper case letters"
